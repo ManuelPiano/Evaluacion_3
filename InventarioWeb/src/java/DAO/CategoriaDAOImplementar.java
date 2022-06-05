@@ -4,11 +4,11 @@
  */
 package DAO;
 
+import Model.Categoria;
+import java.util.List;
 import Factory.ConexionDB;
 import Factory.FactoryConexionDB;
-import Model.Categoria;
-import jakarta.resource.cci.ResultSet;
-import java.sql.SQLException;
+import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,7 +28,7 @@ public class CategoriaDAOImplementar implements CategoriaDAO {
         miSQL.append("SELECT * FROM tb_categoria;");
         List<Categoria> lista = new ArrayList<>();
         try{
-            ResultSet resultadoSQL = this.conn.consultaSQL(miSQL.toString());
+            ResultSet resultadoSQL = (ResultSet) this.conn.consultaSQL(miSQL.toString());
             while(resultadoSQL.next()){
                 Categoria categoria = new Categoria();
                 categoria.setId_categoria(resultadoSQL.getInt("id_categoria"));
@@ -36,7 +36,7 @@ public class CategoriaDAOImplementar implements CategoriaDAO {
                 categoria.setEstado_categoria(resultadoSQL.getInt("estado_categoria"));
                 lista.add(categoria);
             }
-        }catch(SQLException ex){
+        }catch(Exception ex){
             
         }finally{
             this.conn.cerrarConexion();
@@ -56,37 +56,9 @@ public class CategoriaDAOImplementar implements CategoriaDAO {
 
     @Override
     public boolean guardarCat(Categoria categoria) {
-this.conn = FactoryConexionDB.open (FactoryConexionDB.MySQL); 
-//Hacer la conexión
+                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
 
-boolean guarda = false; //Bandera de resultado
-
-try {
-
-if (categoria.getId_categoria() == 0) { //Para cuando es una nueva categoria
-
-//Agregar consulta SQL; el id categoria es autoincrementable
-
-StringBuilder miSQL= new StringBuilder(); 
-miSQL.append("INSERT INTO tb categoria (nom_categoria, estado_categoria) VALUES (""); 
-miSQL.append(categoria.getNom categoria() + ",").append(categoria.getEstado_categoria());
- miSQL.append(");(");
-
-//Invocar método para ejecutar la consulta
-
-this.conn.ejecutarSQL (miSQL.toString());
-
-} else if  (categoria.getId_categoria() > 0) { //Actualizar, id categoria mayores a 0
-
-} 
-catch (Exception e) {
-
-}finally{
-
-this.conn.cerrarConexion(); //Cerrar conexión
-}
-return guarda;
-}
+    }
 
     @Override
     public boolean borrarCat(int id_cat_borrar) {

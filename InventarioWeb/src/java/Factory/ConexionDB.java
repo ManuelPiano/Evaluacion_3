@@ -4,10 +4,10 @@
  */
 package Factory;
 
-import com.mysql.jdbc.Connection;
-import com.mysql.jdbc.Statement;
-import jakarta.resource.cci.ResultSet;
+import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 /**
  *
@@ -24,8 +24,8 @@ public abstract class ConexionDB {
         Statement st;
         ResultSet rs = null;
         try{
-            st = (Statement) conexion.createStatement();
-            rs = (ResultSet) st.executeQuery(consulta);
+            st = conexion.createStatement();
+            rs = st.executeQuery(consulta);
         }catch (SQLException ex){
             ex.printStackTrace();
         }
@@ -35,7 +35,7 @@ public abstract class ConexionDB {
         Statement st;
         boolean guardar = true;
         try{
-            st = (Statement) conexion.createStatement();
+            st = conexion.createStatement();
             st.executeUpdate(consulta);
         }catch(SQLException ex){
             guardar = false;
