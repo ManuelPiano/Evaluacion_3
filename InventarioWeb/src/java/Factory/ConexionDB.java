@@ -47,7 +47,7 @@ public abstract class ConexionDB {
         boolean ok = true;
         try{
             conexion.close();
-        }catch(SQLException ex){
+        }catch(Exception ex){
             ok = false;
             ex.printStackTrace();
         }

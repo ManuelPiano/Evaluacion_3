@@ -5,6 +5,8 @@
 package Factory;
 
 import com.mysql.jdbc.Connection;
+import java.sql.DriverManager;
+
 /**
  *
  * @author manuelpiano31
@@ -18,9 +20,9 @@ public final class MySQLConexionFactory extends ConexionDB {
 
     @Override
     public Connection open() {
-    try{
-        Class.forName("com.mysql.cj.jdbc.Driver");
-            this.conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/" + this.parametros["bd_inventario?zeroDateTimeBehavior=CONVERT_TO_NULL"], this.parametros["root"], this.parametros[""]);
+    try {
+            Class.forName("com.mysql.jdbc.Driver");
+            this.conexion=(Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/bd_inventario?zeroDateTimeBehavior=convertToNull", "root", "");
         }catch(Exception ex){
             ex.printStackTrace();
         }
